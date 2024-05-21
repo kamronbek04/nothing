@@ -20,7 +20,7 @@
         </router-link>
       </li>
       <li class="sidebar__item">
-        <router-link to="/important">
+        <router-link to="/important" @click="filterImportantTasks">
           <img src="../imgs/star-icon.svg" />
           <p>Important</p>
         </router-link>
@@ -35,7 +35,31 @@
   </div>
 </template>
 <script>
-export default {};
+import { mapGetters } from 'vuex';
+export default {
+  methods: {
+    filterImportantTasks() {
+      const importantTasks = this.$store.getters.importantTasks;
+      console.log('a', importantTasks);
+      this.$router.push({
+        name: 'Important',
+        params: { tasks: importantTasks },
+      });
+    },
+  },
+  // computed: {
+  //   ...mapGetters(['importantTasks']),
+  // },
+  // methods: {
+  //   filterImportantTasks() {
+  //     console.log('a', this.importantTasks);
+  //     this.$router.push({
+  //       name: 'Important',
+  //       params: { tasks: this.importantTasks },
+  //     });
+  //   },
+  // },
+};
 </script>
 <style scoped>
 .sidebar {
